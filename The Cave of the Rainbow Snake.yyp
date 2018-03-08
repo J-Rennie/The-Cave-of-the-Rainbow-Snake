@@ -455,6 +455,14 @@
             }
         },
         {
+            "Key": "b2a0948f-659c-4954-ba61-5e89e87a4906",
+            "Value": {
+                "id": "f3a7a81c-67af-423e-b9cb-207ef9e925c5",
+                "resourcePath": "objects\\oFade\\oFade.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "b6d8e51b-418b-4016-8f9a-31b32b3ebefc",
             "Value": {
                 "id": "7c59110b-9e52-4bc1-b62d-66bd1fe69d82",

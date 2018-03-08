@@ -8,16 +8,29 @@ keyEsc = keyboard_check_pressed(vk_escape);
 switch(state)
 {
 	case menuState.main:
-		select = MenuKeySelection(select, keyUp, keyDown, mLength);
-		
-		if(keySelect)
+		if(!instance_exists(oFade))
 		{
-			if(select == 0)
-				room_goto(currentLevel);
-			else if(select == 1)
-				state = menuState.toLevels;
-			else
-				game_end();
+				select = MenuKeySelection(select, keyUp, keyDown, mLength);
+		
+			if(keySelect)
+			{
+				if(select == 0)
+					instance_create_depth(x, y, -10, oFade);
+				else if(select == 1)
+					state = menuState.toLevels;
+				else
+					game_end();
+			
+				select = 0;
+			}
+		}
+	break;
+	
+	case menuState.toLevels:
+		if(keyEsc)
+		{
+			state = menuState.toMain;
+			select = 0;
 		}
 	break;
 	
@@ -38,6 +51,9 @@ switch(state)
 		}
 		
 		if(keyEsc)
+		{
 			state = menuState.toMain;
+			select = 0;
+		}
 	break;
 }

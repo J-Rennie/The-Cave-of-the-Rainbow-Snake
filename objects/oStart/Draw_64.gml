@@ -1,22 +1,33 @@
 draw_set_font(fMenu);
 draw_set_halign(fa_center);
 
-var b = Wave(255, 103, 1.5, 0);
+var b = Wave(255, 103, 1.3, 0);
 var selectCol = make_color_rgb(255, 255, b);
 
 switch(state)
 {
 	case menuState.start:
-		scale = Approach(scale, 1, (1 - scale) / 20);
+		if(alpha < 0.2)
+		{
+			titleScale = Approach(titleScale, 1.6, (1.6 - titleScale) / 25);
+			titleAlpha = Approach(titleAlpha, 1, 0.01);
+			
+			if(titleAlpha > 0.98)
+			{
+				menuScale = Approach(menuScale, 1, (1 - menuScale) / 20);
+				menuAlpha = Approach(menuAlpha, 1, 0.01);
+			}
+		}
+		
 	
-		DrawTextShadowTransformed(640, 30, "The Cave\nof the\nRainbow Snake", c_white, c_black, 0.6, 8, -45, scale + 0.6, scale + 0.6, 0);
+		DrawTextShadowTransformed(640, 30, "The Cave\nof the\nRainbow Snake", c_white, titleAlpha, c_black, titleAlpha - 0.4, 8, -45, titleScale, titleScale, 0);
 
 		for(var i = 0; i <= mLength - 1; i++)
 		{
 			if(select == i)
-				DrawTextShadowTransformed(640, 560 + (80 * i), menu[i], selectCol, c_black, 0.6, 4, -45, scale, scale, 0);
+				DrawTextShadowTransformed(640, 480 + (80 * i), menu[i], selectCol, menuAlpha, c_black, menuAlpha - 0.4, 4, -45, menuScale, menuScale, 0);
 			else
-				DrawTextShadowTransformed(640, 560 + (80 * i), menu[i], c_white, c_black, 0.6, 4, -45, scale, scale, 0);
+				DrawTextShadowTransformed(640, 480 + (80 * i), menu[i], c_white, menuAlpha, c_black, menuAlpha - 0.4, 4, -45, menuScale, menuScale, 0);
 		}
 		
 		draw_set_color(c_black);
@@ -26,62 +37,62 @@ switch(state)
 		draw_set_alpha(1);
 		draw_set_colour(c_white);
 		
-		if(alpha < 0.08)
+		if(menuAlpha == 1)
 			state = menuState.main;
 	break;
 	
 	case menuState.main:
-		DrawTextShadowTransformed(640, 30, "The Cave\nof the\nRainbow Snake", c_white, c_black, 0.6, 8, -45, 1.6, 1.6, 0);
+		DrawTextShadowTransformed(640, 30, "The Cave\nof the\nRainbow Snake", c_white, 1, c_black, 0.6, 8, -45, 1.6, 1.6, 0);
 
 		for(var i = 0; i <= mLength - 1; i++)
 		{
 			if(select == i)
-				DrawTextShadow(640, 560 + (80 * i), menu[i], selectCol, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, 480 + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45);
 			else
-				DrawTextShadow(640, 560 + (80 * i), menu[i], c_white, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, 480 + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
 		}
 	break;
 	
 	case menuState.toMain:
 		yy = Approach(yy, 0, (yy - 0) / 10);
 	
-		DrawTextShadowTransformed(640, (30 - yy), "The Cave\nof the\nRainbow Snake", c_white, c_black, 0.6, 8, -45, 1.6, 1.6, 0);
+		DrawTextShadowTransformed(640, (30 - yy), "The Cave\nof the\nRainbow Snake", c_white, 1, c_black, 0.6, 8, -45, 1.6, 1.6, 0);
 
 		for(var i = 0; i <= mLength - 1; i++)
 		{
 			if(select == i)
-				DrawTextShadow(640, (560 - yy) + (80 * i), menu[i], selectCol, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, (480 - yy) + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45);
 			else
-				DrawTextShadow(640, (560 - yy) + (80 * i), menu[i], c_white, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, (480 - yy) + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
 		}
 		
 		#region // level text
 			draw_set_valign(fa_middle);
 			
 			if(level[Wrap(select-2, 0, 3),2])
-				DrawTextShadowTransformed(-440 + xx, 1300 - yy, level[Wrap(select-2, 0, 3),1], c_white, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(-440 + xx, 1300 - yy, level[Wrap(select-2, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			else
-				DrawTextShadowTransformed(-440 + xx, 1300 - yy, level[Wrap(select-2, 0, 3),1], c_gray, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(-440 + xx, 1300 - yy, level[Wrap(select-2, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			
 			if(level[Wrap(select-1, 0, 3),2])
-				DrawTextShadowTransformed(140 + xx, 1300 - yy, level[Wrap(select-1, 0, 3),1], c_white, c_black, 0.6, 4, -45, scale2, scale2, 0);
+				DrawTextShadowTransformed(140 + xx, 1300 - yy, level[Wrap(select-1, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, scale2, scale2, 0);
 			else
-				DrawTextShadowTransformed(140 + xx, 1300 - yy, level[Wrap(select-1, 0, 3),1], c_gray, c_black, 0.6, 4, -45, scale2, scale2, 0);
+				DrawTextShadowTransformed(140 + xx, 1300 - yy, level[Wrap(select-1, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, scale2, scale2, 0);
 			
 			if(level[select,2])
-				DrawTextShadowTransformed(640 + xx, 1300 - yy, level[select,1], selectCol, c_black, 0.6, 4, -45, scale1, scale1, 0);
+				DrawTextShadowTransformed(640 + xx, 1300 - yy, level[select,1], selectCol, 1, c_black, 0.6, 4, -45, scale1, scale1, 0);
 			else
-				DrawTextShadowTransformed(640 + xx, 1300 - yy, level[select,1], c_gray, c_black, 0.6, 4, -45, scale1, scale1, 0);
+				DrawTextShadowTransformed(640 + xx, 1300 - yy, level[select,1], c_gray, 1, c_black, 0.6, 4, -45, scale1, scale1, 0);
 			
 			if(level[Wrap(select+1, 0, 3),2])
-				DrawTextShadowTransformed(1140 + xx, 1300 - yy, level[Wrap(select+1, 0, 3),1], c_white, c_black, 0.6, 4, -45, scale3, scale3, 0);
+				DrawTextShadowTransformed(1140 + xx, 1300 - yy, level[Wrap(select+1, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, scale3, scale3, 0);
 			else
-				DrawTextShadowTransformed(1140 + xx, 1300 - yy, level[Wrap(select+1, 0, 3),1], c_gray, c_black, 0.6, 4, -45, scale3, scale3, 0);
+				DrawTextShadowTransformed(1140 + xx, 1300 - yy, level[Wrap(select+1, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, scale3, scale3, 0);
 			
 			if(level[Wrap(select+2, 0, 3),2])
-				DrawTextShadowTransformed(1640 + xx, 1300 - yy, level[Wrap(select+2, 0, 3),1], c_white, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(1640 + xx, 1300 - yy, level[Wrap(select+2, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			else
-				DrawTextShadowTransformed(1640 + xx, 1300 - yy, level[Wrap(select+2, 0, 3),1], c_gray, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(1640 + xx, 1300 - yy, level[Wrap(select+2, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 		
 			draw_set_valign(fa_top);
 		#endregion
@@ -98,34 +109,36 @@ switch(state)
 		scale1 = Approach(scale1, 1, (1 - scale1) / 10);
 		scale2 = Approach(scale2, 0.7, (scale2 - 0.7) / 10);
 		scale3 = Approach(scale3, 0.7, (scale3 - 0.7) / 10);
+		
+		//draw_rectangle(300, 100, 980, 480, true);
 	
 		#region // level text
 			draw_set_valign(fa_middle);
 			
 			if(level[Wrap(select-2, 0, 3),2])
-				DrawTextShadowTransformed(-440 + xx, 580, level[Wrap(select-2, 0, 3),1], c_white, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(-440 + xx, 580, level[Wrap(select-2, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			else
-				DrawTextShadowTransformed(-440 + xx, 580, level[Wrap(select-2, 0, 3),1], c_gray, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(-440 + xx, 580, level[Wrap(select-2, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			
 			if(level[Wrap(select-1, 0, 3),2])
-				DrawTextShadowTransformed(140 + xx, 580, level[Wrap(select-1, 0, 3),1], c_white, c_black, 0.6, 4, -45, scale2, scale2, 0);
+				DrawTextShadowTransformed(140 + xx, 580, level[Wrap(select-1, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, scale2, scale2, 0);
 			else
-				DrawTextShadowTransformed(140 + xx, 580, level[Wrap(select-1, 0, 3),1], c_gray, c_black, 0.6, 4, -45, scale2, scale2, 0);
+				DrawTextShadowTransformed(140 + xx, 580, level[Wrap(select-1, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, scale2, scale2, 0);
 			
 			if(level[select,2])
-				DrawTextShadowTransformed(640 + xx, 580, level[select,1], selectCol, c_black, 0.6, 4, -45, scale1, scale1, 0);
+				DrawTextShadowTransformed(640 + xx, 580, level[select,1], selectCol, 1, c_black, 0.6, 4, -45, scale1, scale1, 0);
 			else
-				DrawTextShadowTransformed(640 + xx, 580, level[select,1], c_gray, c_black, 0.6, 4, -45, scale1, scale1, 0);
+				DrawTextShadowTransformed(640 + xx, 580, level[select,1], c_gray, 1, c_black, 0.6, 4, -45, scale1, scale1, 0);
 			
 			if(level[Wrap(select+1, 0, 3),2])
-				DrawTextShadowTransformed(1140 + xx, 580, level[Wrap(select+1, 0, 3),1], c_white, c_black, 0.6, 4, -45, scale3, scale3, 0);
+				DrawTextShadowTransformed(1140 + xx, 580, level[Wrap(select+1, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, scale3, scale3, 0);
 			else
-				DrawTextShadowTransformed(1140 + xx, 580, level[Wrap(select+1, 0, 3),1], c_gray, c_black, 0.6, 4, -45, scale3, scale3, 0);
+				DrawTextShadowTransformed(1140 + xx, 580, level[Wrap(select+1, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, scale3, scale3, 0);
 			
 			if(level[Wrap(select+2, 0, 3),2])
-				DrawTextShadowTransformed(1640 + xx, 580, level[Wrap(select+2, 0, 3),1], c_white, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(1640 + xx, 580, level[Wrap(select+2, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			else
-				DrawTextShadowTransformed(1640 + xx, 580, level[Wrap(select+2, 0, 3),1], c_gray, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(1640 + xx, 580, level[Wrap(select+2, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 		
 			draw_set_valign(fa_top);
 		#endregion
@@ -134,43 +147,43 @@ switch(state)
 	case menuState.toLevels:
 		yy = Approach(yy, 720, (720 - yy) / 10);
 		
-		DrawTextShadowTransformed(640, (30 - yy), "The Cave\nof the\nRainbow Snake", c_white, c_black, 0.6, 8, -45, 1.6, 1.6, 0);
+		DrawTextShadowTransformed(640, (30 - yy), "The Cave\nof the\nRainbow Snake", c_white, 1, c_black, 0.6, 8, -45, 1.6, 1.6, 0);
 
 		for(var i = 0; i <= mLength - 1; i++)
 		{
 			if(select == i)
-				DrawTextShadow(640, (560 - yy) + (80 * i), menu[i], selectCol, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, (480 - yy) + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45);
 			else
-				DrawTextShadow(640, (560 - yy) + (80 * i), menu[i], c_white, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, (480 - yy) + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
 		}
 		
 		#region // level text
 			draw_set_valign(fa_middle);
 			
 			if(level[Wrap(select-2, 0, 3),2])
-				DrawTextShadowTransformed(-440 + xx, 1300 - yy, level[Wrap(select-2, 0, 3),1], c_white, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(-440 + xx, 1300 - yy, level[Wrap(select-2, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			else
-				DrawTextShadowTransformed(-440 + xx, 1300 - yy, level[Wrap(select-2, 0, 3),1], c_gray, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(-440 + xx, 1300 - yy, level[Wrap(select-2, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			
 			if(level[Wrap(select-1, 0, 3),2])
-				DrawTextShadowTransformed(140 + xx, 1300 - yy, level[Wrap(select-1, 0, 3),1], c_white, c_black, 0.6, 4, -45, scale2, scale2, 0);
+				DrawTextShadowTransformed(140 + xx, 1300 - yy, level[Wrap(select-1, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, scale2, scale2, 0);
 			else
-				DrawTextShadowTransformed(140 + xx, 1300 - yy, level[Wrap(select-1, 0, 3),1], c_gray, c_black, 0.6, 4, -45, scale2, scale2, 0);
+				DrawTextShadowTransformed(140 + xx, 1300 - yy, level[Wrap(select-1, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, scale2, scale2, 0);
 			
 			if(level[select,2])
-				DrawTextShadowTransformed(640 + xx, 1300 - yy, level[select,1], selectCol, c_black, 0.6, 4, -45, scale1, scale1, 0);
+				DrawTextShadowTransformed(640 + xx, 1300 - yy, level[select,1], selectCol, 1, c_black, 0.6, 4, -45, scale1, scale1, 0);
 			else
-				DrawTextShadowTransformed(640 + xx, 1300 - yy, level[select,1], c_gray, c_black, 0.6, 4, -45, scale1, scale1, 0);
+				DrawTextShadowTransformed(640 + xx, 1300 - yy, level[select,1], c_gray, 1, c_black, 0.6, 4, -45, scale1, scale1, 0);
 			
 			if(level[Wrap(select+1, 0, 3),2])
-				DrawTextShadowTransformed(1140 + xx, 1300 - yy, level[Wrap(select+1, 0, 3),1], c_white, c_black, 0.6, 4, -45, scale3, scale3, 0);
+				DrawTextShadowTransformed(1140 + xx, 1300 - yy, level[Wrap(select+1, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, scale3, scale3, 0);
 			else
-				DrawTextShadowTransformed(1140 + xx, 1300 - yy, level[Wrap(select+1, 0, 3),1], c_gray, c_black, 0.6, 4, -45, scale3, scale3, 0);
+				DrawTextShadowTransformed(1140 + xx, 1300 - yy, level[Wrap(select+1, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, scale3, scale3, 0);
 			
 			if(level[Wrap(select+2, 0, 3),2])
-				DrawTextShadowTransformed(1640 + xx, 1300 - yy, level[Wrap(select+2, 0, 3),1], c_white, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(1640 + xx, 1300 - yy, level[Wrap(select+2, 0, 3),1], c_white, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 			else
-				DrawTextShadowTransformed(1640 + xx, 1300 - yy, level[Wrap(select+2, 0, 3),1], c_gray, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
+				DrawTextShadowTransformed(1640 + xx, 1300 - yy, level[Wrap(select+2, 0, 3),1], c_gray, 1, c_black, 0.6, 4, -45, 0.7, 0.7, 0);
 		
 			draw_set_valign(fa_top);
 		#endregion

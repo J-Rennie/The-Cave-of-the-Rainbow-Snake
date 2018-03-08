@@ -6,8 +6,11 @@ state = menuState.start;
 
 xx = 0;
 yy = 0;
-alpha = 1;
-scale = 0.8;
+alpha = 1.4;
+titleAlpha = 0;
+menuAlpha = 0;
+titleScale = 1.55;
+menuScale = 0.85;
 
 scale1 = 1;
 scale2 = 0.7;

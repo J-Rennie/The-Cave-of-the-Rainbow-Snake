@@ -10,5 +10,12 @@ enum menuState
 	main,
 	toMain,
 	levels,
-	toLevels
+	toLevels,
+	fade
+}
+
+enum fadeState
+{
+	inc,
+	dec
 }
