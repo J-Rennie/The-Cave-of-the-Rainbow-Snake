@@ -8,10 +8,9 @@ enum menuState
 {
 	start,
 	main,
-	toMain,
 	levels,
 	toLevels,
-	fade
+	fromLevels
 }
 
 enum fadeState
@@ -19,3 +18,6 @@ enum fadeState
 	inc,
 	dec
 }
+
+audio_group_load(agSFX);
+audio_group_load(agMusic);

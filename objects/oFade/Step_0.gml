@@ -1,7 +1,7 @@
 switch(state)
 {
 	case fadeState.inc:
-		alpha += 0.01;
+		alpha += 0.02;
 		
 		if(alpha == 1)
 		{
@@ -11,7 +11,7 @@ switch(state)
 	break;
 	
 	case fadeState.dec:
-		alpha -= 0.01;
+		alpha -= 0.02;
 		
 		if(alpha == 0)
 			instance_destroy(oFade);

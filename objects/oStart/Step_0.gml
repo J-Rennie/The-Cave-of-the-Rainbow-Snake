@@ -7,10 +7,18 @@ keyEsc = keyboard_check_pressed(vk_escape);
 
 switch(state)
 {
+	// =====[CASE - MAIN]=====
 	case menuState.main:
 		if(!instance_exists(oFade))
 		{
-				select = MenuKeySelection(select, keyUp, keyDown, mLength);
+			//select = MenuKeySelection(select, keyUp, keyDown, mLength);
+			
+			for(var i = 0; i <= mLength - 1; i++)
+			{
+				strLength = string_width(menu[i]);
+				if(Within(mouse_x, 640 - strLength, 640 + strLength) || Within(mouse_y, (menuY - 40) + (80 * i), (menuY + 40) + (80 * i)))
+					select = i;
+			}
 		
 			if(keySelect)
 			{
@@ -26,14 +34,16 @@ switch(state)
 		}
 	break;
 	
+	// =====[CASE - TO LEVELS]=====
 	case menuState.toLevels:
 		if(keyEsc)
 		{
-			state = menuState.toMain;
+			state = menuState.fromLevels;
 			select = 0;
 		}
 	break;
 	
+	// =====[CASE - LEVELS]=====
 	case menuState.levels:
 		select = MenuKeySelection(select, keyLeft, keyRight, 4);
 		
@@ -52,7 +62,7 @@ switch(state)
 		
 		if(keyEsc)
 		{
-			state = menuState.toMain;
+			state = menuState.fromLevels;
 			select = 0;
 		}
 	break;

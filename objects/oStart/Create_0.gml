@@ -1,5 +1,3 @@
-
-
 select = 0;
 
 state = menuState.start;
@@ -53,7 +51,10 @@ ini_open("savegame.sav");
 			menu[0] = "PLAY";
 		
 		mLength = array_length_1d(menu);
+		menuY = 640 - (80 * (mLength - 1));
 	#endregion
 	
 	sound = ini_read_real("options", "sound", 1);
+	audio_group_set_gain(agSFX, sound, 0);
+	audio_group_set_gain(agMusic, sound, 0);
 ini_close();

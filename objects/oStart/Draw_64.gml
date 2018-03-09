@@ -6,6 +6,7 @@ var selectCol = make_color_rgb(255, 255, b);
 
 switch(state)
 {
+	// =====[CASE - START]=====
 	case menuState.start:
 		if(alpha < 0.2)
 		{
@@ -25,10 +26,14 @@ switch(state)
 		for(var i = 0; i <= mLength - 1; i++)
 		{
 			if(select == i)
-				DrawTextShadowTransformed(640, 480 + (80 * i), menu[i], selectCol, menuAlpha, c_black, menuAlpha - 0.4, 4, -45, menuScale, menuScale, 0);
+				DrawTextShadowTransformed(640, menuY + (80 * i), menu[i], selectCol, menuAlpha, c_black, menuAlpha - 0.4, 4, -45, menuScale, menuScale, 0);
 			else
-				DrawTextShadowTransformed(640, 480 + (80 * i), menu[i], c_white, menuAlpha, c_black, menuAlpha - 0.4, 4, -45, menuScale, menuScale, 0);
+				DrawTextShadowTransformed(640, menuY + (80 * i), menu[i], c_white, menuAlpha, c_black, menuAlpha - 0.4, 4, -45, menuScale, menuScale, 0);
 		}
+		
+		draw_set_alpha(menuAlpha);
+		draw_sprite(sSound, sound, 10, 10);
+		draw_set_alpha(1);
 		
 		draw_set_color(c_black);
 		alpha = Approach(alpha, 0, 0.01);
@@ -41,19 +46,31 @@ switch(state)
 			state = menuState.main;
 	break;
 	
+	// =====[CASE - MAIN]=====
 	case menuState.main:
+		menuScale = Wave(1, 1.2, 1.3, 0);
+	
 		DrawTextShadowTransformed(640, 30, "The Cave\nof the\nRainbow Snake", c_white, 1, c_black, 0.6, 8, -45, 1.6, 1.6, 0);
 
 		for(var i = 0; i <= mLength - 1; i++)
 		{
 			if(select == i)
-				DrawTextShadow(640, 480 + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45);
+				DrawTextShadowTransformed(640, menuY + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45, menuScale, menuScale, 0);
 			else
-				DrawTextShadow(640, 480 + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, menuY + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
+		}
+		
+		draw_sprite(sSound, sound, 35, 35);
+		
+		for(var i = 0; i <= mLength - 1; i++)
+		{
+			var a = string_width(menu[i]);
+			draw_rectangle(640 - (a / 2), (menuY - 40) + (80 * i), 640 + (a / 2), (menuY + 40) + (80 * i), true);
 		}
 	break;
 	
-	case menuState.toMain:
+	// =====[CASE - FROM LEVELS]=====
+	case menuState.fromLevels:
 		yy = Approach(yy, 0, (yy - 0) / 10);
 	
 		DrawTextShadowTransformed(640, (30 - yy), "The Cave\nof the\nRainbow Snake", c_white, 1, c_black, 0.6, 8, -45, 1.6, 1.6, 0);
@@ -61,10 +78,12 @@ switch(state)
 		for(var i = 0; i <= mLength - 1; i++)
 		{
 			if(select == i)
-				DrawTextShadow(640, (480 - yy) + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, (menuY - yy) + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45);
 			else
-				DrawTextShadow(640, (480 - yy) + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, (menuY - yy) + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
 		}
+		
+		draw_sprite(sSound, sound, 10, 10 - yy);
 		
 		#region // level text
 			draw_set_valign(fa_middle);
@@ -104,6 +123,7 @@ switch(state)
 		}
 	break;
 	
+	// =====[CASE - LEVELS]=====
 	case menuState.levels:
 		xx = Approach(xx, 0, abs(0 - xx) / 10);
 		scale1 = Approach(scale1, 1, (1 - scale1) / 10);
@@ -144,6 +164,7 @@ switch(state)
 		#endregion
 	break;
 	
+	// =====[CASE - TO LEVELS]=====
 	case menuState.toLevels:
 		yy = Approach(yy, 720, (720 - yy) / 10);
 		
@@ -152,10 +173,12 @@ switch(state)
 		for(var i = 0; i <= mLength - 1; i++)
 		{
 			if(select == i)
-				DrawTextShadow(640, (480 - yy) + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, (menuY - yy) + (80 * i), menu[i], selectCol, 1, c_black, 0.6, 4, -45);
 			else
-				DrawTextShadow(640, (480 - yy) + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
+				DrawTextShadow(640, (menuY - yy) + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
 		}
+		
+		draw_sprite(sSound, sound, 15, 15 - yy);
 		
 		#region // level text
 			draw_set_valign(fa_middle);
