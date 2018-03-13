@@ -71,6 +71,14 @@
             }
         },
         {
+            "Key": "25f2c13d-3156-485c-8c8c-3b74227d9a80",
+            "Value": {
+                "id": "d7a0225f-4332-4071-8e89-d4f0a047a052",
+                "resourcePath": "scripts\\RoomYtoGUI\\RoomYtoGUI.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "26e05a87-3621-400c-b5da-7b152d5859f1",
             "Value": {
                 "id": "79fb8dbb-88e1-4b6a-b6ef-4c5b42f476d7",
@@ -575,6 +583,14 @@
             }
         },
         {
+            "Key": "ec751ee2-a90c-4a86-b2c8-a6b710d8b57a",
+            "Value": {
+                "id": "de7b777a-6f3a-44a2-96cd-880a819e05b6",
+                "resourcePath": "scripts\\RoomXtoGUI\\RoomXtoGUI.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "ec946a3d-914b-4b0f-baa8-62bf31c8f5d2",
             "Value": {
                 "id": "2053dbe0-a665-43a1-9437-a9f01943c627",
@@ -653,7 +669,9 @@
         "47bbcd1b-bbf1-4710-8cc0-41c34dfd38f1",
         "5396a000-3a30-48b5-a2b2-f0b9b59017a7",
         "884bfaaa-7c66-4eeb-819f-5d9c851be666",
-        "9fe2934c-033e-403f-a363-1bf1b0fabf8b"
+        "9fe2934c-033e-403f-a363-1bf1b0fabf8b",
+        "ec751ee2-a90c-4a86-b2c8-a6b710d8b57a",
+        "25f2c13d-3156-485c-8c8c-3b74227d9a80"
     ],
     "tutorial": ""
 }

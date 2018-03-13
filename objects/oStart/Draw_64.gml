@@ -60,13 +60,12 @@ switch(state)
 				DrawTextShadow(640, menuY + (80 * i), menu[i], c_white, 1, c_black, 0.6, 4, -45);
 		}
 		
-		draw_sprite(sSound, sound, 35, 35);
+		draw_sprite_ext(sSound, sound, 35, 35, soundScale, soundScale, 0, soundCol, 1);
+		draw_rectangle(10, 10, 140, 100, true);
 		
-		for(var i = 0; i <= mLength - 1; i++)
-		{
-			var a = string_width(menu[i]);
-			draw_rectangle(640 - (a / 2), (menuY - 40) + (80 * i), 640 + (a / 2), (menuY + 40) + (80 * i), true);
-		}
+		draw_rectangle(610 - (string_width(menu[0]) / 2), menuY - 13, 670 + (string_width(menu[0]) / 2), menuY + string_height(menu[0]), true);
+		draw_rectangle(610 - (string_width(menu[1]) / 2), menuY + 67, 670 + (string_width(menu[1]) / 2), menuY + 80 + string_height(menu[0]), true);
+		draw_rectangle(610 - (string_width(menu[2]) / 2), menuY + 147, 670 + (string_width(menu[2]) / 2), menuY + 160 + string_height(menu[2]), true);
 	break;
 	
 	// =====[CASE - FROM LEVELS]=====

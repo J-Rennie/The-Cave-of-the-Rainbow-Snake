@@ -55,6 +55,8 @@ ini_open("savegame.sav");
 	#endregion
 	
 	sound = ini_read_real("options", "sound", 1);
+	soundScale = 1;
+	soundCol = c_white;
 	audio_group_set_gain(agSFX, sound, 0);
 	audio_group_set_gain(agMusic, sound, 0);
 ini_close();
