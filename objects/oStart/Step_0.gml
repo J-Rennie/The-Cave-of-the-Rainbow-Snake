@@ -3,6 +3,19 @@ keyEsc = keyboard_check_pressed(vk_escape);
 
 switch(state)
 {
+	case menuState.start:
+		if(keySelect)
+		{
+			alpha = 0;
+			titleAlpha = 1;
+			titleScale = 1;
+			menuAlpha = 1;
+			menuScale = 1;
+			
+			state = menuState.main;
+		}
+	break;
+	
 	// =====[CASE - MAIN]=====
 	case menuState.main:
 		if(!instance_exists(oFade))
