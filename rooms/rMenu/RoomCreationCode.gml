@@ -1,7 +1,14 @@
 enum playerState
 {
-	idle,
-	talk
+	idle
+}
+
+enum boomState
+{	
+	dropped,
+	held,
+	thrown,
+	returning
 }
 
 enum menuState
